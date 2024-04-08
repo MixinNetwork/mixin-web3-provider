@@ -10,7 +10,7 @@ require("../index");
 require("whatwg-fetch");
 const ethUtil = require("ethereumjs-util");
 const Web3 = require("web3");
-const trustwallet = window.trustwallet;
+const trustwallet = window.mixinwallet;
 
 const mainnet = {
   address: "0x9d8A62f656a8d1615C1294fd71e9CFb3E4855A4F",
@@ -64,7 +64,7 @@ describe("TrustWeb3Provider constructor tests", () => {
     });
     expect(provider.publicKey).toBe(null);
     expect(provider.isDebug).toBeTruthy();
-    expect(provider.isTrust).toBeTruthy();
+    expect(provider.isTrust).toBeFalsy();
     expect(provider.isPhantom).toBeFalsy();
 
     expect(provider.connection.rpcEndpoint).toEqual(
