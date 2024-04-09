@@ -64,7 +64,7 @@ describe("TrustWeb3Provider constructor tests", () => {
     });
     expect(provider.publicKey).toBe(null);
     expect(provider.isDebug).toBeTruthy();
-    expect(provider.isTrust).toBeFalsy();
+    expect(provider.isMixin).toBeTruthy();
     expect(provider.isPhantom).toBeFalsy();
 
     expect(provider.connection.rpcEndpoint).toEqual(
