@@ -313,13 +313,7 @@ class TrustWeb3Provider extends BaseProvider {
 
     const message = typeof data === "string" ? JSON.parse(data) : data;
 
-    const { chainId } = message.domain || {};
-
-    if (!chainId || Number(chainId) !== Number(this.chainId)) {
-      throw new Error(
-        "Provided chainId does not match the currently active chain"
-      );
-    }
+    // const { chainId } = message.domain || {};
 
     const hash =
       version !== SignTypedDataVersion.V1
