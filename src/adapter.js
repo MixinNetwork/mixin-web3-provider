@@ -21568,7 +21568,7 @@ const account_1 = __webpack_require__(/*! ./account */ "./src/account.ts");
 const icon_1 = __webpack_require__(/*! ./icon */ "./src/icon.ts");
 const solana_1 = __webpack_require__(/*! ./solana */ "./src/solana.ts");
 const util_1 = __webpack_require__(/*! ./util */ "./src/util.ts");
-exports.TrustNamespace = 'trust:';
+exports.TrustNamespace = 'mixin:';
 class TrustWallet {
     get version() {
         return __classPrivateFieldGet(this, _TrustWallet_version, "f");

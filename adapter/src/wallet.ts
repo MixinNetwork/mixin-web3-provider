@@ -39,7 +39,7 @@ import { isSolanaChain, isVersionedTransaction, SOLANA_CHAINS } from './solana';
 import { bytesEqual } from './util';
 import type { Trust } from './window';
 
-export const TrustNamespace = 'trust:';
+export const TrustNamespace = 'mixin:';
 
 export type TrustFeature = {
     [TrustNamespace]: {
