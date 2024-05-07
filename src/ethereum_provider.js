@@ -265,7 +265,7 @@ class TrustWeb3Provider extends BaseProvider {
 
     if (
       typeof payload.params?.[0].toLowerCase() === "string" &&
-      this.address === payload.params?.[0].toLowerCase()
+      this.address.toLowerCase() === payload.params?.[0].toLowerCase()
     ) {
       message = payload.params[1];
       address = payload.params[0];
@@ -302,7 +302,7 @@ class TrustWeb3Provider extends BaseProvider {
 
     if (
       typeof payload.params?.[0] === "string" &&
-      this.address === payload.params?.[0].toLowerCase()
+      this.address.toLowerCase() === payload.params?.[0].toLowerCase()
     ) {
       data = payload.params[1];
       address = payload.params[0];
@@ -313,7 +313,16 @@ class TrustWeb3Provider extends BaseProvider {
 
     const message = typeof data === "string" ? JSON.parse(data) : data;
 
-    // const { chainId } = message.domain || {};
+    const { chainId } = message.domain || {};
+
+    if (
+      typeof chainId !== "undefined" &&
+      Number(chainId) !== Number(this.chainId)
+    ) {
+      throw new Error(
+        "Provided chainId does not match the currently active chain"
+      );
+    }
 
     const hash =
       version !== SignTypedDataVersion.V1
