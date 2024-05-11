@@ -68,6 +68,33 @@ class TrustSolanaWeb3Provider extends BaseProvider {
     });
   }
 
+  signIn(signInInput) {
+    if (this.isDebug) {
+      console.log(
+        `==> signIn ${JSON.stringify(signInInput)}`
+      );
+    }
+    return this._request("signIn", { data: signInInput }).then((data) => {
+      var output = Utils.messageToBuffer(data).toString("utf8");
+      if (this.isDebug) {
+        console.log(
+          `<== signIn ${output}`
+        );
+      }
+      var o = JSON.parse(output);
+      return {
+        account: {
+          address: o.account.publicKey,
+          publicKey: new Uint8Array(bs58.decode(o.account.publicKey).buffer),
+          chains: [],
+          features: [],
+        },
+        signature: new Uint8Array(bs58.decode(o.signature).buffer),
+        signedMessage: new Uint8Array(bs58.decode(o.signedMessage).buffer),
+      };
+    });
+  }
+
   mapSignedTransaction(tx, signatureEncoded) {
     const signature = bs58.decode(signatureEncoded);
 
@@ -186,6 +213,8 @@ class TrustSolanaWeb3Provider extends BaseProvider {
           return this.postMessage("signRawTransactionMulti", id, payload);
         case "requestAccounts":
           return this.postMessage("requestAccounts", id, {});
+        case "signIn":
+          return this.postMessage("signIn", id, payload);
         default:
           // throw errors for unsupported methods
           throw new ProviderRpcError(
